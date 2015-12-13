@@ -1,6 +1,7 @@
 package com.imooc.page.model;
 
 import java.io.Serializable;
+import java.util.Map;
 
 public class Student implements Serializable {
 
@@ -24,6 +25,15 @@ public class Student implements Serializable {
 		this.gender = gender;
 		this.address = address;
 	}
+	
+	public Student(Map<String, Object> map){
+		this.id = (int)map.get("id");
+		this.stuName = (String)map.get("stu_name");
+		this.age = (int)map.get("age");
+		this.gender = (int)map.get("gender");
+		this.address = (String)map.get("address");
+	}
+	
 	public int getId() {
 		return id;
 	}

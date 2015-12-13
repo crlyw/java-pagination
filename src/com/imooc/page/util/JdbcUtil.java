@@ -29,7 +29,7 @@ public class JdbcUtil {
 	/**
 	 * load the configuration
 	 */
-	public static void loadConfig(){
+	static {
 		try {
 			InputStream inStream = JdbcUtil.class.getResourceAsStream("/jdbc.properties");
 			Properties prop = new Properties();
@@ -47,7 +47,7 @@ public class JdbcUtil {
 	 * get database connection
 	 * @return
 	 */
-	public Connection getConection(){
+	public Connection getConnection(){
 		try{
 			Class.forName(DRIVER);
 			connection = DriverManager.getConnection(URL,USERNAME,PASSWORD);
@@ -81,7 +81,7 @@ public class JdbcUtil {
 	 * execute the Query SQL
 	 * @return
 	 */
-	public List<Map<String, Object>>finalResult(String sql, List<?> params) throws SQLException{
+	public List<Map<String, Object>>findResult(String sql, List<?> params) throws SQLException{
 		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
 		int index = 1;
 		pstmt = connection.prepareStatement(sql);

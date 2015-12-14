@@ -12,6 +12,7 @@ import com.imooc.page.model.Pager;
 import com.imooc.page.model.Student;
 import com.imooc.page.service.StudentService;
 import com.imooc.page.service.SublistStudentServiceImpl;
+import com.imooc.page.util.StringUtil;
 
 /**
  * Servlet implementation class SublistServlet
@@ -54,8 +55,10 @@ public class SublistServlet extends HttpServlet {
 	    
 	    int pageNum = Constant.DEFAULT_PAGE_NUM;//显示第几页数据
 	    String pageNumStr = request.getParameter("pageNum");
-	    if(pageNumStr!=null && !"".equals(pageNumStr.trim())){
-	    	pageNum = Integer.parseInt(pageNumStr);
+	    if(pageNumStr!=null && !StringUtil.isNum(pageNumStr)){
+	    	request.setAttribute("errorMsg", "参数传输错误");
+	    	request.getRequestDispatcher("/sublistStudent.jsp").forward(request, response);
+	    	return;
 	    }
 	    
 	    int pageSize = 5; //每页显示多少条纪录

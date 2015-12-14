@@ -12,9 +12,64 @@
 	// 获取上下文
 	String context = request.getContextPath();
 %>
+<script type="text/javascript">
+	
+	//当前显示第几页数据
+	var currentPage = ${result.currentPage};
+	//一共多少页数据
+	var totalPage = ${result.totalPage};
+	
+	function submitForm(actionUrl){
+		var formElement = document.getElementById("stuForm");
+		formElement.action = actionUrl;
+		formElement.submit();
+	}
+	
+	function firstPage(){
+		if(currentPage == 1){
+			alert("已经是第一页数据");
+			return false;
+		}else{
+			submitForm("<%=context %>/sublist/SublistServlet?pageNum=1");
+			return true;
+		}
+	}
+	
+	function nextPage(){
+		if(currentPage == totalPage){
+			alert("已经是最后一页数据了");
+			return false;
+		}else{
+			submitForm("<%=context %>/sublist/SublistServlet?pageNum=" + (currentPage+1));
+			return true;
+		}
+	}
+	
+	function previousPage(){
+		if(currentPage == 1){
+			alert("已经是第一页数据");
+			return false;
+		}else{
+			submitForm("<%=context %>/sublist/SublistServlet?pageNum=" +(currentPage-1));
+			return true;
+		}
+	}
+	
+	function lastPage(){
+		if(currentPage == totalPage){
+			alert("已经是最后一页数据");
+			return false;
+		}else{
+			submitForm("<%=context %>/sublist/SublistServlet?pageNum=${result.totalPage}")
+		}
+	}
+</script>
 <body>
 	
 	<div style = "margin-left: 100px; margin-top:100px">
+		<div>
+			<font color="red">${errorMsg}</font>
+		</div>
 		<div>
 			<form action="<%=context %>/sublist/SublistServlet" id="stuForm" method="post">
 				姓名
@@ -64,6 +119,11 @@
 				</tr>
 			</c:forEach>		
 		</table>
+		<br>共${result.totalRecord}条纪录共${result.totalPage}页&nbsp;&nbsp; 当前第${result.currentPage}页&nbsp;&nbsp;
+		<a href = "#" onclick="firstPage();">首页</a>&nbsp;&nbsp;
+		<a href = "#" onclick="previousPage();">上一页</a>&nbsp;&nbsp;
+		<a href = "#" onclick="nextPage();">下一页</a>&nbsp;&nbsp;
+		<a href = "#" onclick="lastPage();">尾页</a>&nbsp;&nbsp;
 		</c:if>
 	</div>
 </body>

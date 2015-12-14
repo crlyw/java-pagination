@@ -43,6 +43,7 @@ public class SublistServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		request.setCharacterEncoding("UTF-8");
 		//接收request里的参数
 		String stuName = request.getParameter("stuName"); //学生姓名
 		

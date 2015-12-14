@@ -41,6 +41,7 @@ public class Pager<T> implements Serializable{
 			this.currentPage = pageNum;
 		}
 		
+		System.out.println(sourceList.toString());
 		//起始索引
 		int fromIndex = this.pageSize * (this.currentPage-1);
 		

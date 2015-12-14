@@ -28,18 +28,18 @@ public class SublistStudentDaoImpl implements StudentDao{
 	private List<Student> getAllStudent(Student searchModel){
 		List<Student> result = new ArrayList<Student>();
 		List<Object> paramList = new ArrayList<Object>();
-		String stuname = searchModel.getStuName();
+		String stuName = searchModel.getStuName();
 		int gender = searchModel.getGender();
 		
 		StringBuilder sql = new StringBuilder("select * from t_student where 1=1");
 		
-		if(stuname != null && !stuname.equals("")){
+		if(stuName != null && !stuName.equals("")){
 			sql.append(" and stu_name like ?");
-			paramList.add("%" + stuname + "%");
+			paramList.add("%" + stuName + "%");
 		}
 		
 		if(gender == Constant.GENDER_FEMALE || gender == Constant.GENDER_MALE){
-			sql.append("and gender = ?");
+			sql.append(" and gender = ?");
 			paramList.add(gender);
 		}
 		
